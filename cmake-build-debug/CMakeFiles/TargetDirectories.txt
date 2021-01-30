@@ -1,3 +1,0 @@
-/home/thanasis/CLionProjects/it219148/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/thanasis/CLionProjects/it219148/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/thanasis/CLionProjects/it219148/cmake-build-debug/CMakeFiles/it219148.dir

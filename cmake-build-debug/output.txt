@@ -1,5 +1,0 @@
- /etc/acpi/undock.sh , 40
- /etc/acpi/asus-keyboard-backlight.sh , 60
- /etc/acpi/tosh-wireless.sh , 136
- /etc/acpi/ibm-wireless.sh , 118
- /etc/acpi/asus-wireless.sh , 24
