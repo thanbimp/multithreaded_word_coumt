@@ -36,6 +36,7 @@ void myFun(char *path, FILE *fp) {
     pid = fork();
     do {
         if (pid != 0) { //do only when in child process
+            printf("Process with ID :%d for file :%s created\n",pid,path);
             char *buffer = 0;
             long length;
             FILE *f = fopen(path, "rb"); //open current file
@@ -66,15 +67,18 @@ void myFun(char *path, FILE *fp) {
                 strncpy(threadParts[4],buffer + currChar,finalPart); //copy final (and bigger part)
             }
             for (int j = 0; j < 5; ++j) { //create 5 threads,one for each string
+                printf("Thread:%d created\n",j);
                 pthread_mutex_lock(&lock);
                 pthread_create(&threadId, NULL, &myThread,threadParts[j]); //give one part of string to one thread
                 pthread_join(threadId,&wordsCount);
+                printf("Thread:%d terminated\n",j);
                 pthread_mutex_unlock(&lock);
                 wordsSum=wordsSum+(int)wordsCount; //sum returned word counts from threads
             }
             fprintf(fp," %s , %d\n",path,wordsSum); //append to file
             forkCounter++; //increment counter for flow control
             kill(pid, SIGKILL); //kill the forked process
+            printf("Process with ID :%d for file :%s terminated\n",pid,path);
         }
     }while (forkCounter < forkTarget);
 }
@@ -90,7 +94,8 @@ int main(int argc, char const *argv[])
     int i=0;
     int filecounter=0;
     if(argv[1]==NULL){ //if argv[1] is empty
-        getcwd(folder, sizeof(folder)); //get current working directory
+        getcwd(folder, sizeof(folder)); //get current working directory'
+        printf("No directory specified,running on current directory!\n");
     }
     else if (S_ISDIR(info.st_mode)){ //else if argv[1] is not empty and has folder path
         strcpy(folder,argv[1]); // copy argv[1] to string;
